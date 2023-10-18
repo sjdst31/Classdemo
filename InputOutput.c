@@ -71,7 +71,7 @@ policies, either expressed or implied, of the FreeBSD Project.
 
 // Version 2 version is friendly
 void Port1_Init(void){
-  P1->SEL0 &= ~0x13;
+  P1->SEL0 &= ~0x12;
   P1->SEL1 &= ~0x13;   // 1) configure P1.4  P1.1 P1.0 as GPIO
   P1->DIR &= ~0x12;    // 2) make P1.4 and P1.1 in
   P1->DIR |= 0x01;     // 2) make P1.0 out
@@ -102,11 +102,11 @@ int main(void){ uint8_t status;
     status = Port1_Input();
     switch(status){                 // switches are negative logic on P1.1 and P1.4
       case 0x10:                    // SW1 pressed
-        Port2_Output(BLUE);
+        Port2_Output(GREEN);
         Port1_Output(1);
         break;
       case 0x02:                    // SW2 pressed
-        Port2_Output(RED);
+        Port2_Output(YELLOW);
         Port1_Output(1);
         break;
       case 0x00:                    // both switches pressed
@@ -115,7 +115,7 @@ int main(void){ uint8_t status;
         break;
       case 0x12:                    // neither switch pressed
         Port2_Output(0);
-        Port1_Output(0);
+        Port1_Output(7);
         break;
     }
   }
